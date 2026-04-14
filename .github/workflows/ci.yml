@@ -12,13 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          path: ControlAgentNet.Channels.Console
-
-      - uses: actions/checkout@v4
-        with:
-          repository: ControlAgentNet/ControlAgentNet.Agents
-          path: ControlAgentNet.Agents
 
       - uses: actions/setup-dotnet@v4
         with:
@@ -27,7 +20,6 @@ jobs:
       - name: Read base version
         id: base_version
         shell: bash
-        working-directory: ControlAgentNet.Channels.Console
         run: |
           BASE_VERSION=$(python - <<'PY'
           import re
@@ -57,7 +49,6 @@ jobs:
       - name: Validate release tag matches VersionPrefix
         if: startsWith(github.ref, 'refs/tags/v')
         shell: bash
-        working-directory: ControlAgentNet.Channels.Console
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
           BASE_VERSION="${{ steps.base_version.outputs.base_version }}"
@@ -68,15 +59,15 @@ jobs:
           fi
 
       - name: Restore
-        working-directory: ControlAgentNet.Channels.Console
         run: dotnet restore ControlAgentNet.Channels.Console.slnx
 
       - name: Build
-        working-directory: ControlAgentNet.Channels.Console
         run: dotnet build ControlAgentNet.Channels.Console.slnx --no-restore -c Release /p:Version=${{ steps.version.outputs.package_version }}
 
+      - name: Test
+        run: dotnet test ControlAgentNet.Channels.Console.slnx --no-build -c Release --collect:"XPlat Code Coverage"
+
       - name: Pack
-        working-directory: ControlAgentNet.Channels.Console
         run: dotnet pack ControlAgentNet.Channels.Console.slnx --no-build -c Release -o artifacts/nuget /p:Version=${{ steps.version.outputs.package_version }}
 
       - name: Upload NuGet artifacts
@@ -84,5 +75,5 @@ jobs:
         with:
           name: nuget-packages-${{ steps.version.outputs.package_version }}
           path: |
-            ControlAgentNet.Channels.Console/artifacts/nuget/*.nupkg
-            ControlAgentNet.Channels.Console/artifacts/nuget/*.snupkg
+            artifacts/nuget/*.nupkg
+            artifacts/nuget/*.snupkg

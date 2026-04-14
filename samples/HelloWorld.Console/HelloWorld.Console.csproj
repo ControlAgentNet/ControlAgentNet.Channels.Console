@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ControlAgentNet.Agents\src\ControlAgentNet.Agents\ControlAgentNet.Agents.csproj" />
     <ProjectReference Include="..\..\src\ControlAgentNet.Channels.Console\ControlAgentNet.Channels.Console.csproj" />
   </ItemGroup>
 
@@ -12,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ControlAgentNet.Agents" Version="0.1.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.5" />
   </ItemGroup>
 

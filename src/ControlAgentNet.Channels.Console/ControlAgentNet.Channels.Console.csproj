@@ -1,16 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\ControlAgentNet.Agents\src\ControlAgentNet.Core\ControlAgentNet.Core.csproj" />
-    <ProjectReference Include="..\..\..\ControlAgentNet.Agents\src\ControlAgentNet.Runtime\ControlAgentNet.Runtime.csproj" />
-  </ItemGroup>
-
   <PropertyGroup>
     <Description>Interactive console channel for ControlAgentNet agents.</Description>
     <PackageId>ControlAgentNet.Channels.Console</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ControlAgentNet.Core" Version="0.1.1" />
+    <PackageReference Include="ControlAgentNet.Runtime" Version="0.1.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.5" />
   </ItemGroup>
 

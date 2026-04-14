@@ -11,13 +11,6 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
-        with:
-          path: ControlAgentNet.Channels.Console
-
-      - uses: actions/checkout@v4
-        with:
-          repository: ControlAgentNet/ControlAgentNet.Agents
-          path: ControlAgentNet.Agents
 
       - uses: actions/setup-dotnet@v4
         with:
@@ -26,7 +19,6 @@ jobs:
       - name: Read base version
         id: base_version
         shell: bash
-        working-directory: ControlAgentNet.Channels.Console
         run: |
           BASE_VERSION=$(python - <<'PY'
           import re
@@ -42,7 +34,6 @@ jobs:
 
       - name: Validate release tag matches VersionPrefix
         shell: bash
-        working-directory: ControlAgentNet.Channels.Console
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
           BASE_VERSION="${{ steps.base_version.outputs.base_version }}"
@@ -53,20 +44,19 @@ jobs:
           fi
 
       - name: Restore
-        working-directory: ControlAgentNet.Channels.Console
         run: dotnet restore ControlAgentNet.Channels.Console.slnx
 
       - name: Build
-        working-directory: ControlAgentNet.Channels.Console
         run: dotnet build ControlAgentNet.Channels.Console.slnx --no-restore -c Release /p:Version=${GITHUB_REF_NAME#v}
 
+      - name: Test
+        run: dotnet test ControlAgentNet.Channels.Console.slnx --no-build -c Release --collect:"XPlat Code Coverage"
+
       - name: Pack
-        working-directory: ControlAgentNet.Channels.Console
         run: dotnet pack ControlAgentNet.Channels.Console.slnx --no-build -c Release -o artifacts/nuget /p:Version=${GITHUB_REF_NAME#v}
 
       - name: Push NuGet packages
         shell: bash
-        working-directory: ControlAgentNet.Channels.Console
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
