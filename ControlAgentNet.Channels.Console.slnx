@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ControlAgentNet.Channels.Console/ControlAgentNet.Channels.Console.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/HelloWorld.Console/HelloWorld.Console.csproj" />
+  </Folder>
+</Solution>
