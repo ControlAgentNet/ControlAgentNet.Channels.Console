@@ -2,11 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/license/ControlAgentNet/ControlAgentNet.Channels.Console" alt="License">
-  <img src="https://img.shields.io/github/stars/ControlAgentNet/ControlAgentNet.Channels.Console" alt="Stars">
   <img src="https://img.shields.io/github/actions/workflow/status/ControlAgentNet/ControlAgentNet.Channels.Console/ci.yml?branch=main" alt="CI">
   <img src="https://img.shields.io/nuget/v/ControlAgentNet.Channels.Console" alt="NuGet Version">
-  <img src="https://img.shields.io/nuget/dt/ControlAgentNet.Channels.Console" alt="NuGet Downloads">
-  <img src="https://img.shields.io/badge/.NET-10-512BD4" alt=".NET 10">
 </p>
 
 > Interactive console channel for ControlAgentNet agents.
