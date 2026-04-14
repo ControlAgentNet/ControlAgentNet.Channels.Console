@@ -75,9 +75,9 @@ The repository includes `samples/HelloWorld.Console` to demonstrate the channel 
 
 ## Versioning
 
-- local builds: `0.1.0-dev`
-- pull requests: `0.1.0-preview.<run_number>`
-- pushes to `main`: `0.1.0-alpha.<run_number>`
-- tags like `v0.1.0`: exact stable package version `0.1.0`
+- local builds: `0.1.1-dev`
+- pull requests: `0.1.1-preview.<run_number>`
+- pushes to `main`: `0.1.1-alpha.<run_number>`
+- tags like `v0.1.1`: exact stable package version `0.1.1`
 
 See `VERSIONING.md` for the release flow.
