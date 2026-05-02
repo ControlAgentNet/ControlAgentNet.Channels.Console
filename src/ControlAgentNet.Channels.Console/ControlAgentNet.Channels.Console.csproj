@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ControlAgentNet.Core" Version="0.1.1" />
-    <PackageReference Include="ControlAgentNet.Runtime" Version="0.1.1" />
+    <PackageReference Include="ControlAgentNet.Core" Version="0.1.7" />
+    <PackageReference Include="ControlAgentNet.Runtime" Version="0.1.7" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.5" />
   </ItemGroup>
 

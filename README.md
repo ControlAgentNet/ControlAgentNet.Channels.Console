@@ -56,9 +56,20 @@ samples/
 ControlAgentNet.Channels.Console.slnx
 ```
 
+## Message Contract
+
+Console input is normalized into the shared `IncomingMessage` contract from `ControlAgentNet.Core`.
+
+- `ChannelId` is `console`
+- `ChannelType` is `Console`
+- `ConversationId` is the local console session
+- `UserId` is `console-user`
+
+Agents should read `IncomingMessage` and stay independent of console implementation details.
+
 ## Build
 
-This repository depends on the base source repository during CI and local source builds.
+By default this repository depends on the `ControlAgentNet.Core` and `ControlAgentNet.Runtime` packages from NuGet or another configured package source.
 
 ```bash
 dotnet restore ControlAgentNet.Channels.Console.slnx
@@ -66,15 +77,31 @@ dotnet build ControlAgentNet.Channels.Console.slnx -c Release
 dotnet pack ControlAgentNet.Channels.Console.slnx -c Release -o artifacts/nuget
 ```
 
+For local coordinated development against the sibling base repository, use project references instead of NuGet by passing `UseLocalControlAgentNet=true`:
+
+```bash
+dotnet restore ControlAgentNet.Channels.Console.slnx /p:UseLocalControlAgentNet=true
+dotnet build ControlAgentNet.Channels.Console.slnx -c Release /p:UseLocalControlAgentNet=true
+dotnet test ControlAgentNet.Channels.Console.slnx -c Release --no-build /p:UseLocalControlAgentNet=true
+```
+
+The default base path is `../ControlAgentNet.Agents` relative to this repository. Override it when the repos are not siblings:
+
+```bash
+dotnet build ControlAgentNet.Channels.Console.slnx /p:UseLocalControlAgentNet=true /p:ControlAgentNetBasePath=/absolute/path/to/ControlAgentNet.Agents
+```
+
+Do not use `UseLocalControlAgentNet=true` for package publishing; releases should validate the NuGet dependency graph.
+
 ## Sample
 
 The repository includes `samples/HelloWorld.Console` to demonstrate the channel working with the base package.
 
 ## Versioning
 
-- local builds: `0.1.1-dev`
-- pull requests: `0.1.1-preview.<run_number>`
-- pushes to `main`: `0.1.1-alpha.<run_number>`
-- tags like `v0.1.1`: exact stable package version `0.1.1`
+- local builds: `0.1.3-dev`
+- pull requests: `0.1.3-preview.<run_number>`
+- pushes to `main`: `0.1.3-alpha.<run_number>`
+- tags like `v0.1.3`: exact stable package version `0.1.3`
 
 See `VERSIONING.md` for the release flow.

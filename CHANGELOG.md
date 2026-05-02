@@ -10,4 +10,5 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- Console messages now populate the shared `ChannelType` field from `ControlAgentNet.Core`.
 - Initial project structure and implementation.

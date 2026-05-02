@@ -50,7 +50,8 @@ public sealed class ConsoleChannelService : BackgroundService
                 TenantId = "local",
                 UserId = "console-user",
                 Text = input,
-                ChannelId = "console"
+                ChannelId = ConsoleChannelDescriptor.Instance.Id,
+                ChannelType = ConsoleChannelDescriptor.Instance.Transport
             }, stoppingToken);
 
             System.Console.WriteLine($"Agent: {response.Text}");
